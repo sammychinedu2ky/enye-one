@@ -7,7 +7,7 @@ import {Box} from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     width: '40%',
-    overflowX: 'auto',
+    overflowX: 'auto'
   },
   alignItemsAndJustifyContent: {
    
