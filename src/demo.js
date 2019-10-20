@@ -53,7 +53,7 @@ export default function MaterialTableDemo() {
      
       </div>
     </Box>
-    <Paper style={{width:"90%",margin:'auto'}} >
+    <Paper style={{width:"95%",margin:'auto'}} >
     
     <MaterialTable 
       title="Editable Table form"
