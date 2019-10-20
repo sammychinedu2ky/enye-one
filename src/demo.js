@@ -7,11 +7,10 @@ import {Box} from '@material-ui/core';
 const useStyles = makeStyles({
   root: {
     width: '40%',
-   
     overflowX: 'auto',
   },
   alignItemsAndJustifyContent: {
-    
+   
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -44,19 +43,19 @@ export default function MaterialTableDemo() {
   });
 
   return (<>
-    <Box m="auto">
+    <Box m="auto" >
     
       <div className={classes.alignItemsAndJustifyContent}>
       <Typography variant='h5' component='h5' style={{marginBottom:12}} >
-      Example detailing an editable form and table
+      Example of an editable form and table
       </Typography>
      
      
       </div>
     </Box>
-    <Paper className={classes.alignItemsAndJustifyContent}>
+    <Paper style={{width:"80%",margin:'auto'}} >
     
-    <MaterialTable sm={6}
+    <MaterialTable 
       title="Editable Table form"
       columns={state.columns}
       
