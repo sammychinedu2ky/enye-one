@@ -38,7 +38,6 @@ export default function MaterialTableDemo() {
     ],
     data: [
       
-      
     ],
   });
 
