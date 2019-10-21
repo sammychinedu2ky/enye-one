@@ -27,6 +27,7 @@ export default function MaterialTableDemo() {
     columns: [
       { title: 'FirstName', field: 'firstname' },
       { title: 'LastName', field: 'lastname' },
+      
       { title: 'Birthday', field: 'birthday', type: 'date' },
      
       { title: 'Age', field: 'age'},
