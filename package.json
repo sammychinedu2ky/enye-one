@@ -9,6 +9,7 @@
     "material-table": "latest",
     "react": "latest",
     "react-dom": "latest",
+    "react-redux": "^7.1.1",
     "react-scripts": "latest"
   },
   "keywords": [],
@@ -32,5 +33,4 @@
       "last 1 safari version"
     ]
   }
-  
 }

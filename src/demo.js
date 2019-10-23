@@ -4,13 +4,16 @@ import {Paper} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {Typography} from '@material-ui/core';
 import {Box} from '@material-ui/core';
+import { connect } from "react-redux";
+import {setState} from './Redux/action.js'
 const useStyles = makeStyles({
   root: {
     width: '40%',
-    overflowX: 'auto'
+   
+    overflowX: 'auto',
   },
   alignItemsAndJustifyContent: {
-   
+    
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
@@ -21,13 +24,12 @@ const useStyles = makeStyles({
     overflowX: "scroll"
   },
 });
-export default function MaterialTableDemo() {
-  const classes = useStyles();
-  const [state, setState] = React.useState({
+ function MaterialTableDemo(props) {
+const classes = useStyles();
+ /* const [state, setState] = React.useState({
     columns: [
       { title: 'FirstName', field: 'firstname' },
       { title: 'LastName', field: 'lastname' },
-      
       { title: 'Birthday', field: 'birthday', type: 'date' },
      
       { title: 'Age', field: 'age'},
@@ -38,41 +40,41 @@ export default function MaterialTableDemo() {
       },
     ],
     data: [
-      
-    ],
+       ],
   });
-
-  return (<>
-    <Box m="auto" >
-    
-      <div className={classes.alignItemsAndJustifyContent}>
-      <Typography variant='h5' component='h5' style={{marginBottom:12}} >
-      Example of an editable form and table
-      </Typography>
-     
-     
-      </div>
+*/
+return (<>
+    <Box m="auto">
+    <div className={classes.alignItemsAndJustifyContent}>
+    <Typography variant='h5' component='h5' style={{marginBottom:12}} >
+    Example detailing an editable form and table
+    </Typography>
+     </div>
     </Box>
-    <Paper style={{width:"97%",margin:'auto'}} >
+    <Paper>
     
-    <MaterialTable 
+    <MaterialTable sm={6}
       title="Editable Table form"
-      columns={state.columns}
+      //columns={state.columns}
+      columns={props.columns}
       
-      data={state.data}
+     // data={state.data}
+      data={props.data}
+      
       actions={[
         {
           icon: 'save',
           tooltip: 'Submit',
-          onClick: (event, rowData) => alert("You saved " + JSON.stringify(rowData))
+          onClick: (event, rowData) => alert("You saved " + JSON.stringify())
         }
       ]}
       editable={{
-        onRowAdd: newData =>
+        onRowAdd: newData =>console.log(newData)||
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              const data = [...state.data];
+              //const data = [...state.data];
+              const data = [...props.data]
              // alert(new Date(data['birthday']).getUTCFullYear())
               newData.age=(new Date().getUTCFullYear())-(new Date(newData['birthday']).getUTCFullYear())
             
@@ -80,29 +82,35 @@ export default function MaterialTableDemo() {
        // (new Date().getUTCFullYear())-(new Date(data[data.indexOf(newData)]['birthday']).getUTCFullYear())
 
               data.push(newData);
-              setState({ ...state, data });
+              //setState({ ...state, data });
+              props.setState({...props,data})
+              console.log({...props,data})
             }, 600);
           }),
         onRowUpdate: (newData, oldData) =>
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              const data = [...state.data];
-              
+              //const data = [...state.data];
+              const data = [props.data]
               data[data.indexOf(oldData)] = newData;
              data[data.indexOf(newData)]['age']=(new Date().getUTCFullYear())-(new Date(data[data.indexOf(newData)]['birthday']).getUTCFullYear())
              
             
-              setState({ ...state, data });
+              //setState({ ...state, data });
+            
+            props.setState({...props,data})
             }, 600);
           }),
         onRowDelete: oldData =>
           new Promise(resolve => {
             setTimeout(() => {
               resolve();
-              const data = [...state.data];
+              //const data = [...state.data];
+              const data = [...props.data]
               data.splice(data.indexOf(oldData), 1);
-              setState({ ...state, data });
+              //setState({ ...state, data });
+              props.setState({...props,data})
             }, 600);
           }),
       }}
@@ -111,3 +119,13 @@ export default function MaterialTableDemo() {
     </>
   );
 }
+
+
+function mapStateToProps({columns,data}) {
+  
+  return { columns,data }
+}
+export default connect(
+  mapStateToProps,
+  {setState} 
+)(MaterialTableDemo);
