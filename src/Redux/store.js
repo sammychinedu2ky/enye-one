@@ -10,7 +10,7 @@ import loggerMiddleware from './middleware/logger'
 
 
 export default function configureStore(preloadedState) {
-  const middlewares = [loggerMiddleware, thunkMiddleware]
+  const middlewares = [loggerMiddleware, thunkMiddleware];
   const middlewareEnhancer = applyMiddleware(...middlewares)
 
   const enhancers = [middlewareEnhancer, monitorReducersEnhancer]
