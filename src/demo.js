@@ -28,10 +28,11 @@ const useStyles = makeStyles({
 const classes = useStyles();
 let props = useSelector(({columns,data})=>({columns,data}))
 console.log(props.data)
+/* doesn't work well due to change in reference after rendering
 props.setState = useDispatch(content => ({
   type: 'CHANGE',
   data:{...content}
-}));
+}));*/
 let dispatch = useDispatch()
 props.setState = useCallback((content)=>dispatch({type:'CHANGE',data:{...content}}),[dispatch])
 /*const incrementCounter = useCallback(
