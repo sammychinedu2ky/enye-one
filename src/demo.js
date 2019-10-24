@@ -1,10 +1,10 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import MaterialTable from 'material-table';
 import {Paper} from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {Typography} from '@material-ui/core';
 import {Box} from '@material-ui/core';
-import { connect } from "react-redux";
+import { connect,useDispatch,useSelector,shallowEqual } from "react-redux";
 import {setState} from './Redux/action.js'
 const useStyles = makeStyles({
   root: {
@@ -24,8 +24,20 @@ const useStyles = makeStyles({
     overflowX: "scroll"
   },
 });
- function MaterialTableDemo(props) {
+ export default function MaterialTableDemo() {
 const classes = useStyles();
+let props = useSelector(({columns,data})=>({columns,data}))
+console.log(props.data)
+props.setState = useDispatch(content => ({
+  type: 'CHANGE',
+  data:{...content}
+}));
+let dispatch = useDispatch()
+props.setState = useCallback((content)=>dispatch({type:'CHANGE',data:{...content}}),[dispatch])
+/*const incrementCounter = useCallback(
+  () => dispatch({ type: 'increment-counter' }),
+  [dispatch]
+)*/
  /* const [state, setState] = React.useState({
     columns: [
       { title: 'FirstName', field: 'firstname' },
@@ -125,7 +137,7 @@ function mapStateToProps({columns,data}) {
   
   return { columns,data }
 }
-export default connect(
+/*export default connect(
   mapStateToProps,
   {setState} 
-)(MaterialTableDemo);
+)(MaterialTableDemo);*/

@@ -5,5 +5,5 @@ import Demo from './demo';
 import { Provider } from "react-redux";
 import store from "./Redux/store";
 
-ReactDOM.render(<Provider store={store()}><Demo /></Provider>, document.querySelector('#root'));
+ReactDOM.render(<Provider store={store}><Demo /></Provider>, document.querySelector('#root'));
     
